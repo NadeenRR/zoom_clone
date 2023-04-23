@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../resources/auth_mehods.dart';
 import '../widgets/custome_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -10,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthMethods _authMethods = AuthMethods();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +29,12 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         CustomeButton(
           text: 'Google Sign In',
-          onPressed: () {},
+          onPressed: () async {
+            bool res = await _authMethods.signInWithGoogle(context);
+            if (res) {
+              debugPrint('login');
+            }
+          },
         )
       ]),
     );
