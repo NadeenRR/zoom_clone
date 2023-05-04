@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('Meet & Chat'),
+        title: const Text('Meet & Chat'),
         centerTitle: true,
         backgroundColor: backgroundColor,
       ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:zoom_clone/resources/auth_mehods.dart';
 import 'package:zoom_clone/screens/home_screen.dart';
 import 'package:zoom_clone/screens/login_screen.dart';
+import 'package:zoom_clone/screens/video_call_screen.dart';
 import 'package:zoom_clone/utils/color.dart';
 
 import 'firebase_options.dart';
@@ -10,7 +11,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
 }
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/login': (context) => const LoginScreen(),
-          '/home': (context) => const HomeScreen()
+          '/home': (context) => const HomeScreen(),
+          '/video-call': (context) => const VideoCallScreen()
         },
         home: StreamBuilder(
             stream: AuthMethods().authChanges,

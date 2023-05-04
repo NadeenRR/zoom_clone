@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'auth_mehods.dart';
 import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 
+import 'firestore_method.dart';
+
 class JitsiMeetMethods {
   final AuthMethods _authMethods = AuthMethods();
+  final FirestoreMethod firestoreMethod = FirestoreMethod();
 
   createMeeting({
     required String roomName,
@@ -23,17 +27,14 @@ class JitsiMeetMethods {
     // Define meetings options here
     var options = JitsiMeetingOptions(
       roomNameOrUrl: name,
-      // serverUrl: serverUrl,
-      // subject: subjectText.text,
-      // token: tokenText.text,
       isAudioMuted: isAudioMuted,
-      //   isAudioOnly: isAudioOnly,
+      userAvatarUrl: _authMethods.user.photoURL,
       isVideoMuted: isVideoMuted,
       userDisplayName: _authMethods.user.displayName,
       userEmail: _authMethods.user.email,
       featureFlags: featureFlags,
     );
-
+    firestoreMethod.addToMeetingHistory(roomName);
     debugPrint("JitsiMeetingOptions: $options");
     await JitsiMeetWrapper.joinMeeting(
       options: options,
